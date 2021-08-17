@@ -1,6 +1,13 @@
 const util = require('util');
 const execFile = util.promisify(require('child_process').execFile);
 const repoURL = 'repo url'//process.env.GITHUB_SERVER_URL + '/' + process.env.GITHUB_REPOSITORY;
+const commitsTags = ["feat:", "fix:", "perf:"]
+const commitsTagTitles = [
+    {"feat:": "Новый функционал"},
+    {"fix:": "Исправлены ошибки"},
+    {"perf:": "Улучшина производительность"}
+]
+
 async function generateReleaseNotes({range, dateFormat = 'short'}) {
     dateFormat = dateFormat.includes('%') ? 'format:' + dateFormat : dateFormat;
     // Get commits between computed range
@@ -42,8 +49,8 @@ async function generateReleaseNotes({range, dateFormat = 'short'}) {
 
     return commitEntries.map(item => {return item.title}).filter(Boolean).join('\n');
     //return releaseTemplate
-      //  .replace('{commits}', commitEntries.join('\n'))
-        //.replace('{range}', `[\`${range}\`](${repoURL}/compare/${range})`);
+    //  .replace('{commits}', commitEntries.join('\n'))
+    //.replace('{range}', `[\`${range}\`](${repoURL}/compare/${range})`);
 }
 
 exports.generateReleaseNotes = generateReleaseNotes;
