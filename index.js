@@ -15,7 +15,7 @@ async function run() {
         const buildUrl = core.getInput("build-url");
         const qrCodeUrl = core.getInput("qr-code-url");
         const projectName = process.env.GITHUB_REPOSITORY;
-        const isRelease = core.getInput("is-release") ?? false;
+        const isRelease = core.getInput("is-release")
         const channel = core.getInput("channel");
         const releaseString = (isRelease === "true" || isRelease === true) ? "Release" : "Pre Release"
 
