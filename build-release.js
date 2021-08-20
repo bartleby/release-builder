@@ -101,6 +101,7 @@ function makeRegExp(key = "") {
 }
 
 function removeNewLineSymbols(value = "") {
+    if (typeof(value) !== "string") { return "" }
     return value
         .replaceAll("\n", "")
         .replaceAll("\r", "")
