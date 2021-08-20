@@ -1,11 +1,11 @@
 const headerPattern = "{\"type\": \"header\",\"text\": {\"type\": \"plain_text\",\"text\": \"{header}\",\"emoji\": true}},"
 const sectionPattern = "{\"type\": \"section\",\"text\": {\"type\": \"mrkdwn\",\"text\": \"{subject}\"}},"
 function getHeader(title = "") {
-    return headerPattern.replaceAll(RegExp("{header}", "ig"), title)
+    return headerPattern.replace(RegExp("{header}", "ig"), title)
 }
 
 function getSection(subject = "") {
-    return sectionPattern.replaceAll(RegExp("\{subject\}", "ig"), subject)
+    return sectionPattern.replace(RegExp("\{subject\}", "ig"), subject)
 }
 
 async function generateSlackRelease(model) {

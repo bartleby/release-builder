@@ -37,7 +37,7 @@ async function generateReleaseModel({range, dateFormat = 'short'}) {
         let commitTitle = removeNewLineSymbols(title)
         let commitKey = keyFromCommit(commitTitle)
         const regExp = makeRegExp(commitKey)(false, "", true)
-        const commitSubject = commitTitle.replaceAll(regExp, "")
+        const commitSubject = commitTitle.replace(regExp, "")
 
         let bodyCommits = body
             .split("\n")
@@ -73,7 +73,7 @@ async function generateReleaseModel({range, dateFormat = 'short'}) {
             }
 
             const bodyCommitRegExp = makeRegExp(bodyCommitKey)(false, "\\* ", true)
-            const bodyCommitSubject = bodyCommitTitle.replaceAll(bodyCommitRegExp, "")
+            const bodyCommitSubject = bodyCommitTitle.replace(bodyCommitRegExp, "")
             let groupIndex = getIndexFor(commitTitle, groupedCommits)
 
             if (groupIndex === -1) {
@@ -101,10 +101,9 @@ function makeRegExp(key = "") {
 }
 
 function removeNewLineSymbols(value = "") {
-    if (typeof(value) !== "string") { return "" }
     return value
-        .replaceAll("\n", "")
-        .replaceAll("\r", "")
+        .replace("\n", "")
+        .replace("\r", "")
         .trim()
 }
 

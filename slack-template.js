@@ -24,33 +24,33 @@ function slackTemplate(
         + "Version: " + version
 
     return rootTemplate
-        .replaceAll("{channel}", channel)
-        .replaceAll("{root}",
+        .replace("{channel}", channel)
+        .replace("{root}",
             headerTemplate
-                .replaceAll("{header}", header)
+                .replace("{header}", header)
             + imageSectionPattern
-                .replaceAll("{header}", projectInfo)
-                .replaceAll("{image}", imageUrl)
+                .replace("{header}", projectInfo)
+                .replace("{image}", imageUrl)
             + dividerTemplate
             + headerTemplate
-                .replaceAll("{header}", "Changelog:")
+                .replace("{header}", "Changelog:")
             + dividerTemplate
             + changelog
             + dividerTemplate
             + actionsTemplate
-                .replaceAll(
+                .replace(
                     "{actions}",
                     actionTemplate
-                        .replaceAll("{title}", "Open ZenHub")
-                        .replaceAll("{url}", "https://app.zenhub.com/")
+                        .replace("{title}", "Open ZenHub")
+                        .replace("{url}", "https://app.zenhub.com/")
                     + actionStyleTemplate
-                        .replaceAll("{title}", "New Issue")
-                        .replaceAll("{url}", repoURL + "/issues/new?assignees=&labels=feature&template=feature.md&title=")
-                        .replaceAll("{style}", "primary")
+                        .replace("{title}", "New Issue")
+                        .replace("{url}", repoURL + "/issues/new?assignees=&labels=feature&template=feature.md&title=")
+                        .replace("{style}", "primary")
                     + actionStyleTemplate
-                        .replaceAll("{title}", "New Bug Report")
-                        .replaceAll("{url}", repoURL + "/issues/new?assignees=&labels=bug&template=bug.md&title=")
-                        .replaceAll("{style}", "danger")
+                        .replace("{title}", "New Bug Report")
+                        .replace("{url}", repoURL + "/issues/new?assignees=&labels=bug&template=bug.md&title=")
+                        .replace("{style}", "danger")
                 )
 
         )

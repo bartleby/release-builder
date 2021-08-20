@@ -43,7 +43,7 @@ async function generateReleaseModel({range, dateFormat = 'short'}) {
         let commitTitle = removeNewLineSymbols(title)
         let commitKey = keyFromCommit(commitTitle)
         const regExp = makeRegExp(commitKey)(false, "", true)
-        const commitSubject = commitTitle.replaceAll(regExp, "")
+        const commitSubject = commitTitle.replace(regExp, "")
 
         let bodyCommits = body
             .split("\n")
@@ -79,7 +79,7 @@ async function generateReleaseModel({range, dateFormat = 'short'}) {
             }
 
             const bodyCommitRegExp = makeRegExp(bodyCommitKey)(false, "\\* ", true)
-            const bodyCommitSubject = bodyCommitTitle.replaceAll(bodyCommitRegExp, "")
+            const bodyCommitSubject = bodyCommitTitle.replace(bodyCommitRegExp, "")
             let groupIndex = getIndexFor(commitTitle, groupedCommits)
 
             if (groupIndex === -1) {
@@ -108,8 +108,8 @@ function makeRegExp(key = "") {
 
 function removeNewLineSymbols(value = "") {
     return value
-        .replaceAll("\n", "")
-        .replaceAll("\r", "")
+        .replace("\n", "")
+        .replace("\r", "")
         .trim()
 }
 
@@ -149,13 +149,13 @@ const sectionItemPattern = "<li>{item}</li>"
 const sectionPattern = "<h3>{header}</h3><ul>{subject}</ul>"
 
 function getHeader(title = "") {
-    return headerPattern.replaceAll(RegExp("{header}", "ig"), title)
+    return headerPattern.replace(RegExp("{header}", "ig"), title)
 }
 
 function getSection(title = "", subject = "") {
     return sectionPattern
-        .replaceAll(RegExp("\{header\}", "ig"), title)
-        .replaceAll(RegExp("\{subject\}", "ig"), subject)
+        .replace(RegExp("\{header\}", "ig"), title)
+        .replace(RegExp("\{subject\}", "ig"), subject)
 }
 
 async function generateHtmlRelease(model) {
@@ -164,7 +164,7 @@ async function generateHtmlRelease(model) {
             return getSection(
                 subtitle.title,
                 subtitle.list
-                    .map(i => {return sectionItemPattern.replaceAll(RegExp("\{item\}", "ig"), i)})
+                    .map(i => {return sectionItemPattern.replace(RegExp("\{item\}", "ig"), i)})
                     .join("")
             )
         }).join("")
@@ -657,11 +657,11 @@ exports.toCommandValue = toCommandValue;
 const headerPattern = "{\"type\": \"header\",\"text\": {\"type\": \"plain_text\",\"text\": \"{header}\",\"emoji\": true}},"
 const sectionPattern = "{\"type\": \"section\",\"text\": {\"type\": \"mrkdwn\",\"text\": \"{subject}\"}},"
 function getHeader(title = "") {
-    return headerPattern.replaceAll(RegExp("{header}", "ig"), title)
+    return headerPattern.replace(RegExp("{header}", "ig"), title)
 }
 
 function getSection(subject = "") {
-    return sectionPattern.replaceAll(RegExp("\{subject\}", "ig"), subject)
+    return sectionPattern.replace(RegExp("\{subject\}", "ig"), subject)
 }
 
 async function generateSlackRelease(model) {
@@ -705,33 +705,33 @@ function slackTemplate(
         + "Version: " + version
 
     return rootTemplate
-        .replaceAll("{channel}", channel)
-        .replaceAll("{root}",
+        .replace("{channel}", channel)
+        .replace("{root}",
             headerTemplate
-                .replaceAll("{header}", header)
+                .replace("{header}", header)
             + imageSectionPattern
-                .replaceAll("{header}", projectInfo)
-                .replaceAll("{image}", imageUrl)
+                .replace("{header}", projectInfo)
+                .replace("{image}", imageUrl)
             + dividerTemplate
             + headerTemplate
-                .replaceAll("{header}", "Changelog:")
+                .replace("{header}", "Changelog:")
             + dividerTemplate
             + changelog
             + dividerTemplate
             + actionsTemplate
-                .replaceAll(
+                .replace(
                     "{actions}",
                     actionTemplate
-                        .replaceAll("{title}", "Open ZenHub")
-                        .replaceAll("{url}", "https://app.zenhub.com/")
+                        .replace("{title}", "Open ZenHub")
+                        .replace("{url}", "https://app.zenhub.com/")
                     + actionStyleTemplate
-                        .replaceAll("{title}", "New Issue")
-                        .replaceAll("{url}", repoURL + "/issues/new?assignees=&labels=feature&template=feature.md&title=")
-                        .replaceAll("{style}", "primary")
+                        .replace("{title}", "New Issue")
+                        .replace("{url}", repoURL + "/issues/new?assignees=&labels=feature&template=feature.md&title=")
+                        .replace("{style}", "primary")
                     + actionStyleTemplate
-                        .replaceAll("{title}", "New Bug Report")
-                        .replaceAll("{url}", repoURL + "/issues/new?assignees=&labels=bug&template=bug.md&title=")
-                        .replaceAll("{style}", "danger")
+                        .replace("{title}", "New Bug Report")
+                        .replace("{url}", repoURL + "/issues/new?assignees=&labels=bug&template=bug.md&title=")
+                        .replace("{style}", "danger")
                 )
 
         )
