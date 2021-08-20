@@ -1,0 +1,33 @@
+name: 'Release Builder'
+description: 'build release and slack message'
+inputs:
+  header:
+    description: 'Header of Release'
+    required: true
+    default: 'Header of Release'
+  build-url:
+    description: 'url of Release'
+    required: true
+    default: 'None'
+  qr-code-url:
+    description: 'url of qr code'
+    required: true
+    default: 'None'
+  is-release:
+    description: 'is release'
+    required: false
+    default: 'false'
+  channel:
+    description: 'channel in slack'
+    required: true
+    default: ''
+outputs:
+  changelog-html:
+    description: 'The html formatting changelog'
+  changelog-slack:
+    description: 'The slack formatting changelog'
+  tag-name:
+    description: 'Name of last tag'
+runs:
+  using: 'node12'
+  main: 'index.js'
