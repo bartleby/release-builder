@@ -682,7 +682,7 @@ exports.generateSlackRelease = generateSlackRelease;
 const rootTemplate = "{\"channel\": \"{channel}\",\"blocks\": [{root}]}"
 const headerTemplate = "{\"type\": \"header\",\"text\": {\"type\": \"plain_text\",\"text\": \"{header}\",\"emoji\": true}},"
 const dividerTemplate = "{\"type\": \"divider\"},"
-const actionsTemplate = "{\"type\": \"actions\",\"elements\": [{actions}]},"
+const actionsTemplate = "{\"type\": \"actions\",\"elements\": [{actions}]}"
 const imageSectionPattern = "{\"type\": \"section\",\"text\": {\"type\": \"mrkdwn\",\"text\": \"{header}\"},\"accessory\": " +
     "{\"type\": \"image\",\"image_url\": \"{image}\",\"alt_text\": \"qr code\"}},"
 const actionTemplate = "{\"type\": \"button\",\"text\": {\"type\": \"plain_text\",\"text\": \"{title}\",\"emoji\": true},\"url\": \"{url}\"},"
@@ -732,6 +732,7 @@ function slackTemplate(
                         .replace("{title}", "New Bug Report")
                         .replace("{url}", repoURL + "/issues/new?assignees=&labels=bug&template=bug.md&title=")
                         .replace("{style}", "danger")
+                        .slice(0, -1)
                 )
 
         )
