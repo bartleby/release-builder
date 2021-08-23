@@ -16,7 +16,7 @@ async function generateSlackRelease(model) {
         return getHeader(item.title) + item.list.map( subtitle => {
             return getSection("*" +subtitle.title + "*" + "\\n" + subtitle.list.join("\\n"))
         }).join("")
-    }).split(0, slack_blocks_limit - reserved_block_count).join("")
+    }).slice(0, slack_blocks_limit - reserved_block_count).join("")
 }
 
 exports.generateSlackRelease = generateSlackRelease;
