@@ -672,11 +672,11 @@ async function generateSlackRelease(model) {
     return model.map( item => {
         blockCount += item.list.length + 1 // + header
         console.log("blockCount: " + blockCount)
-        if (blockCount >= slack_blocks_limit - reserved_block_count) { return ""}
+        if (blockCount >= slack_blocks_limit - reserved_block_count) { return "null" }
         return getHeader(item.title) + item.list.map( subtitle => {
             return getSection("*" +subtitle.title + "*" + "\\n" + subtitle.list.join("\\n"))
         }).join("")
-    })
+    }).filter(i => {return i !== "null"}).join("")
 }
 
 exports.generateSlackRelease = generateSlackRelease;
