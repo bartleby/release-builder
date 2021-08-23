@@ -838,8 +838,8 @@ const {generateHtmlRelease} = __nccwpck_require__(37);
 const {generateSlackRelease} = __nccwpck_require__(846);
 const {slackTemplate} = __nccwpck_require__(259);
 
-let process = {env: {}};
-process.env.GITHUB_REF = "undefined";
+// let process = {env: {}};
+// process.env.GITHUB_REF = "undefined";
 
 async function run() {
     try {

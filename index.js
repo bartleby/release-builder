@@ -6,8 +6,8 @@ const {generateHtmlRelease} = require("./html-format-builder");
 const {generateSlackRelease} = require("./slack-format-builder");
 const {slackTemplate} = require("./slack-template");
 
-let process = {env: {}};
-process.env.GITHUB_REF = "undefined";
+// let process = {env: {}};
+// process.env.GITHUB_REF = "undefined";
 
 async function run() {
     try {
